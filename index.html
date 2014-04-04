@@ -15,28 +15,33 @@
 </head>
 <body>    
     <label>IP</label>
-    <input type="text" id="ip" />
+	<br />
+    <input type="text" id="ip" class="text_field" />
+	<br />
 
     <label>JID</label>
-    <input type="text" id="jid" />
-
+	<br />
+    <input type="text" id="jid" class="text_field" />
+    <br />
+	
 	<label>Password</label>
-    <input type="password" id="password" placeholder="Password"/>
-
+	<br />
+    <input type="password" id="password" placeholder="Password" class="text_field"/>
+    <br />
+	
 	<input type="button" id="connect" value="Connect" />
 
-	<hr>
-
-    
+	<hr>    
 
 	<label>TO:</label>
-    <input type="text" id="contact"/>
+	<br />
+    <input type="text" id="contact" class="text_field"/>
     <br />
 
      <label>Messages:</label>
 	<div id='MSG'></div>
 
-	<textarea id="mymsg" onSubmit='sendMessage("mymsg");'> </textarea>
+	<textarea id="mymsg" onSubmit='sendMessage("mymsg");' class="text_field"> </textarea>
     <br />
 	<input type='button' id='sendMessage' class="button" value='send' onclick='sendMessage("mymsg");'/>
 		

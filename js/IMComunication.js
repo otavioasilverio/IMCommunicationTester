@@ -8,7 +8,7 @@ var password = '';
 var contact = ''
 
 function log(msg) {
-    $('#log').append('<div></div>').append(document.createTextNode(msg));
+    $('#log').append('<div></div>"').append(document.createTextNode(msg));
 }
 
 function rawInput(data) {
@@ -68,14 +68,17 @@ function connectButton_Click() {
     }
 }
 function onMessage(msg) {
+	
+
     var to = msg.getAttribute('to');
     var from = msg.getAttribute('from');
+	 var fromBareJid = Strophe.getBareJidFromJid(from);
     var type = msg.getAttribute('type');
     var elems = msg.getElementsByTagName('body');
 
     if (type == "chat" && elems.length > 0) {
         var body = elems[0];
-        showMessagem(from, Strophe.getText(body))
+        showMessagem(fromBareJid, Strophe.getText(body), "receiver")
     }
     return true;
 }
@@ -92,7 +95,7 @@ function sendMessage(elemid) {
             var to = contact;
             var reply = $msg({ to: contact, from: connection.jid, type: "chat" }).c("body").t(text);
             connection.send(reply.tree());
-            showMessagem(connection.jid, text)
+            showMessagem(connection.authcid, text, "sender")
             $('#' + elemid).get(0).value = "";
         }
     }
@@ -103,9 +106,15 @@ function sendMessage(elemid) {
     }
 }
 
-function showMessagem(userName, message) {
-    $('#MSG').append('<div></div>').append(document.createTextNode('<' + userName + '>' + message));
-
+function showMessagem(userName, message, userClass) {
+  	
+	var blockquote=document.createElement("blockquote");
+	var div=document.createElement("div");
+	div.className = userClass;
+	var text=document.createTextNode('<' + userName + '>' + message);
+	div.appendChild(text);
+	blockquote.appendChild(div);
+	$('#MSG').append(div);   
 }
 
 
